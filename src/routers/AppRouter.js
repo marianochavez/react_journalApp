@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoadingScreen from 'react-loading-screen';
 import { JournalScreen } from "../components/journal/JournalScreen";
 import { AuthRouter } from "./AuthRouter";
 import { firebase } from "../firebase/firebase-config";
@@ -31,7 +32,13 @@ export const AppRouter = () => {
 
   if (checking) {
     return (
-      <h1>Espere...</h1>
+      <LoadingScreen
+        loading={true}
+        bgColor='#f1f1f1'
+        spinnerColor='#8F497B'
+        textColor='#676767'
+        text='Loading...'
+      /> 
     )
   }
 
