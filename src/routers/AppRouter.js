@@ -26,24 +26,26 @@ export const AppRouter = () => {
       } else {
         setIsLoggedIn(false);
       }
-      setChecking(false);
+      setInterval(() => {
+        setChecking(false);
+      }, 500);      
     });
   }, [dispatch, setChecking,setIsLoggedIn]);
 
-  if (checking) {
-    return (
-      <LoadingScreen
-        loading={true}
-        bgColor='#f1f1f1'
-        spinnerColor='#8F497B'
-        textColor='#676767'
-        text='Loading...'
-      /> 
-    )
-  }
 
   return (
     <BrowserRouter>
+
+      { checking &&
+        <LoadingScreen
+          loading={true}
+          bgColor='#f1f1f1'
+          spinnerColor='#8F497B'
+          textColor='#676767'
+          text='Loading...'
+        />
+      }
+
       <Routes>
         
           <Route path="/auth/*" element={
