@@ -8,6 +8,7 @@ import { login } from "../actions/auth";
 import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
 import DoubbleBubble from "../components/spinner/DoubleBubble";
+import { startLoadingNotes } from "../actions/notes";
 
 export const AppRouter = () => {
 
@@ -19,15 +20,17 @@ export const AppRouter = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged( async(user) => {
       if (user?.uid) {
         dispatch(login(user.uid, user.displayName));
         setIsLoggedIn(true);
+        // carga las notas del usuario
+        dispatch(startLoadingNotes(user.uid));
+        
       } else {
         setIsLoggedIn(false);
       }
-      // setInterval(() => {
-      // }, 500);      
+  
       setChecking(false);
     });
   }, [dispatch, setChecking,setIsLoggedIn]);
@@ -35,6 +38,7 @@ export const AppRouter = () => {
   if (checking) {
     return(
       <div>
+        {/* Pantalla de carga */}
         <DoubbleBubble speed={5} customText={'Loading'}/>
       </div>
     )
@@ -42,7 +46,6 @@ export const AppRouter = () => {
 
   return (
     <BrowserRouter>
-
 
       <Routes>
         
@@ -58,7 +61,6 @@ export const AppRouter = () => {
           </PrivateRoute>
         } />
 
-        
       </Routes>
     </BrowserRouter>
   );
