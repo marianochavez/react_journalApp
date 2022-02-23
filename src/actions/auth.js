@@ -11,7 +11,7 @@ export const startLoginEmailPassword = (email, password) => {
     // loading true, para evitar disparar otra vez el login
     dispatch(startLoading());
 
-    firebase
+    return firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(({ user }) => {

@@ -3,9 +3,9 @@ import cloudinary from "cloudinary";
 import { fileUpload } from "../../helpers/fileUpload";
 
 cloudinary.v2.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET, 
+  cloud_name: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.REACT_APP_CLOUDINARY_API_KEY,
+  api_secret: process.env.REACT_APP_CLOUDINARY_API_SECRET, 
 });
 
 describe("fileUpload tests", () => {
@@ -14,9 +14,6 @@ describe("fileUpload tests", () => {
       "https://res.cloudinary.com/chavedo/image/upload/v1645057321/react-journal/hola.jpg",
       {
         method: "GET",
-        headers: {
-          "Content-Type": "image/png",
-        },
       }
     );
     const blob = await resp.blob();

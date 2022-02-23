@@ -15,11 +15,11 @@ export const notesReducer = (state = initialState, action) => {
         },
       };
 
-      case types.notesAddNew:
-        return{
-          ...state,
-          notes: [ action.payload, ...state.notes]
-        }
+    case types.notesAddNew:
+      return {
+        ...state,
+        notes: [action.payload, ...state.notes],
+      };
 
     case types.notesLoad:
       return {
@@ -43,11 +43,11 @@ export const notesReducer = (state = initialState, action) => {
       };
 
     case types.notesLogoutCleaning:
-      return{
+      return {
         ...state,
         active: null,
         notes: [],
-      }
+      };
 
     default:
       return state;
